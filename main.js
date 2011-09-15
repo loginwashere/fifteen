@@ -1,7 +1,3 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 $(document).ready(function(){
     var fifteen = {
         elements: [
@@ -34,24 +30,39 @@ $(document).ready(function(){
             var self = this;
             $.each(self.elements, function(key, value){
                 $.each(value, function(key, value){
+                    $('#element' + value).live('click', function(){
+                        if ($(this).next().attr('id') === 'element0') {
+                            $('#element0').insertBefore($(this));
+                        } else if ($(this).prev().attr('id') === 'element0') {
+                            $('#element0').insertAfter($(this));
+                        } else if ($(this).parent().prev().find('span:nth-child(' + ($(this).index() + 1) + ')').attr('id') === 'element0') {
+                            var element0 = $(this).parent().prev().find('span:nth-child(' + ($(this).index() + 1) + ')');
+                            self.checkPrevNext(element0, $(this));
+                        } else if ($(this).parent().next().find('span:nth-child(' + ($(this).index() + 1) + ')').attr('id') === 'element0') {
+                            var element0 = $(this).parent().next().find('span:nth-child(' + ($(this).index() + 1) + ')');
+                            self.checkPrevNext(element0, $(this));
+                        } else if ($(this).attr('id') === 'element0') {
+                            $(this).bind('click', function(){
+                                var neighbors = Array(
+                                    $(this).parent().prev().find('span:nth-child(' + ($(this).index() + 1) + ')'),
+                                    $(this).parent().next().find('span:nth-child(' + ($(this).index() + 1) + ')'),
+                                    $(this).prev(),
+                                    $(this).next()
+                                );
+                                var neighbor = neighbors[self.getRandom(0, 3)];
+                                if (neighbor) {
+                                    neighbor.trigger('click');
+                                }
+                                $(this).unbind('click');
+                            });
+                        }/*
+                        var result;
+                        if (result = self.checkOrder()) {
+                            alert('You WIN!!!');
+                        }*/
+                    });
                     if (value !== 0) {
-                        $('#element' + value).html(value).css('backgroundColor', self.getColor()).live('click', function(){
-                            if ($(this).next().attr('id') === 'element0') {
-                                $('#element0').insertBefore($(this));
-                            } else if ($(this).prev().attr('id') === 'element0') {
-                                $('#element0').insertAfter($(this));
-                            } else if ($(this).parent().prev().find('span:nth-child(' + ($(this).index() + 1) + ')').attr('id') === 'element0') {
-                                var element0 = $(this).parent().prev().find('span:nth-child(' + ($(this).index() + 1) + ')');
-                                self.checkPrevNext(element0, $(this));
-                            } else if ($(this).parent().next().find('span:nth-child(' + ($(this).index() + 1) + ')').attr('id') === 'element0') {
-                                var element0 = $(this).parent().next().find('span:nth-child(' + ($(this).index() + 1) + ')');
-                                self.checkPrevNext(element0, $(this));
-                            }
-                            var result;
-                            if (result = self.checkOrder()) {
-                                alert('You WIN!!!');
-                            }
-                        });
+                        $('#element' + value).html(value).css('backgroundColor', self.getColor());
                     }
                 });
             });
@@ -108,5 +119,8 @@ $(document).ready(function(){
 
     };
     fifteen.write();
+    setInterval(function(){
+        $('#element0').trigger('click');
+    }, 500);
 });
 
