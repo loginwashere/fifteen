@@ -1,43 +1,40 @@
-/* 
-    Document   : style.css
-    Created on : 04.09.2011, 14:45:15
-    Author     : login.was.here
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
-/* 
-   TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
-*/
-
 #container { 
-    width: 425px;
+    width: 435px;
+    height: 435px;
     margin: 0 auto;
     padding: 0;
     border: 0;
 }
-.row {
-    height: 105px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
 .element {
-    margin: 0 5px 0 0;
-    padding: 40px 0;
-    text-align: center;
-    vertical-align: middle;
+    margin: 0 5px 5px 0;
     border: 1px solid #000;
     width: 100px;
-    height: 20px;
+    height: 100px;
     display: block;
     float: left;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.element img {
+    margin: 25px 0 0 25px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    border-radius: 5px;
 }
-#element0 {
+.element p {    
+    border: 1px solid #000;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin: 3px 3px 0 0;
+    text-align: center;
+    float: right;
+    width: 20px;
+    background: #fff;
+}
+#element15 {
     border: 1px solid #fff;
 }
-
+.counter {
+    float: left;
+}

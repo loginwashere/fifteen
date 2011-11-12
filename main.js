@@ -1,126 +1,64 @@
-$(document).ready(function(){
-    var fifteen = {
-        elements: [
-            [
-                1,
-                2,
-                3,
-                4
-            ],
-            [
-                5,
-                6,
-                7,
-                8
-            ],
-            [
-                9,
-                10,
-                11,
-                12
-            ],
-            [
-                13,
-                14,
-                15,
-                0
-            ],
-        ],
-        write: function(){
+var fifteen = (function() {
+    return {            
+        counter: 0,
+        emptyElementId: null,
+        elements: null,
+        width: 4,
+        height: 4,
+        increment: function() {
+            this.counter++;
+            $('.counter').text(this.counter);
+        },
+        init: function(){
             var self = this;
-            $.each(self.elements, function(key, value){
-                $.each(value, function(key, value){
-                    $('#element' + value).live('click', function(){
-                        if ($(this).next().attr('id') === 'element0') {
-                            $('#element0').insertBefore($(this));
-                        } else if ($(this).prev().attr('id') === 'element0') {
-                            $('#element0').insertAfter($(this));
-                        } else if ($(this).parent().prev().find('span:nth-child(' + ($(this).index() + 1) + ')').attr('id') === 'element0') {
-                            var element0 = $(this).parent().prev().find('span:nth-child(' + ($(this).index() + 1) + ')');
-                            self.checkPrevNext(element0, $(this));
-                        } else if ($(this).parent().next().find('span:nth-child(' + ($(this).index() + 1) + ')').attr('id') === 'element0') {
-                            var element0 = $(this).parent().next().find('span:nth-child(' + ($(this).index() + 1) + ')');
-                            self.checkPrevNext(element0, $(this));
-                        } else if ($(this).attr('id') === 'element0') {
-                            $(this).bind('click', function(){
-                                var neighbors = Array(
-                                    $(this).parent().prev().find('span:nth-child(' + ($(this).index() + 1) + ')'),
-                                    $(this).parent().next().find('span:nth-child(' + ($(this).index() + 1) + ')'),
-                                    $(this).prev(),
-                                    $(this).next()
-                                );
-                                var neighbor = neighbors[self.getRandom(0, 3)];
-                                if (neighbor) {
-                                    neighbor.trigger('click');
-                                }
-                                $(this).unbind('click');
-                            });
-                        }/*
-                        var result;
-                        if (result = self.checkOrder()) {
-                            alert('You WIN!!!');
-                        }*/
-                    });
-                    if (value !== 0) {
-                        $('#element' + value).html(value).css('backgroundColor', self.getColor());
-                    }
-                });
+            self.elements = $('.element');
+            self.emptyElementId = self.elements.last().attr('id');
+            self.elements.each(function(index, value){
+                var element = $(value);
+                if (element.attr('id') !== self.emptyElementId) {
+                    element.css('backgroundColor', self.getColor());
+                }
+            }).live('click', function(){
+                var emptyElement = null,
+                    clickedElement = $(this);
+                if (clickedElement.next().attr('id') === self.emptyElementId) {
+                    self.increment();
+                    $('#'+self.emptyElementId).insertBefore(clickedElement);
+                } else if (clickedElement.prev().attr('id') === self.emptyElementId) {
+                    self.increment();
+                    $('#'+self.emptyElementId).insertAfter(clickedElement);
+                } else if ((emptyElement = clickedElement.parent().find('div:eq(' + (clickedElement.index()- self.width) + ')')).attr('id') === self.emptyElementId) {
+                    self.switchElements($(emptyElement), clickedElement);
+                } else if ((emptyElement = clickedElement.parent().find('div:eq(' + (clickedElement.index() + self.width) + ')')).attr('id') === self.emptyElementId) {
+                    self.switchElements($(emptyElement), clickedElement);
+                }
             });
         },
         getColor: function(){
-            var r = this.getRandom(0, 255);
-            var g = this.getRandom(0, 255);
-            var b = this.getRandom(0, 255);
-            
-            return 'rgb(' + r + ',' + g + ',' + b + ')';
+            return 'rgb(' 
+                + this.getRandom(0, 255) + ',' 
+                + this.getRandom(0, 255) + ',' 
+                + this.getRandom(0, 255) + ')';
         },
         getRandom: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
-        },
-        checkOrder: function() {
-            var self = this;
-            
-            var counter = 0;
-            $.each($('.row'), function(key, value){                
-                $.each($(value).find('.element'), function(key1, value){
-                    
-                    if (value.id === 'element' + self.elements[key][key1]) {
-                        counter++;
-                    } else {
-                        return false;
-                    }
-                });
-            });
-            if (counter === 16) {
-                return true;
-            }
-            return false;
-        },
-        checkPrevNext: function(element0, clickedElement) {
-            var next = element0.next();
-            if (next.length) {
-                var thisNext = clickedElement.next();
-                element0.insertBefore(thisNext);
-                clickedElement.insertBefore(next);
+        },            
+        switchElements: function(emptyElement, clickedElement) {
+            this.increment();
+            if (emptyElement.index() > clickedElement.index()) {
+                var tmpElement = clickedElement.next();
+                var tmpElement0 = emptyElement.prev();
+                emptyElement.insertBefore(tmpElement);
+                clickedElement.insertAfter(tmpElement0);
             } else {
-                var prev = element0.prev();
-                var thisPrev = clickedElement.prev();
-                element0.insertAfter(thisPrev);
-                clickedElement.insertAfter(prev);
+                var tmpElement = clickedElement.prev();
+                var tmpElement0 = emptyElement.next();
+                emptyElement.insertAfter(tmpElement);
+                clickedElement.insertBefore(tmpElement0);
             }
-        },
-        shuffle: function(array) {
-            var self = this;
-            var result;
-            $.each(self.elements, function(key, value){
-                result = 0;
-            });
         }
-
-    };
-    fifteen.write();
-    setInterval(function(){
-        $('#element0').trigger('click');
-    }, 500);
+    }
+})();
+$(document).ready(function(){
+    fifteen.init();
 });
-
