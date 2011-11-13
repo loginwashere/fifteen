@@ -66,15 +66,18 @@
 
         // when a photo is received from the backend, add it to the page
         socket.on('photo', function(photo) {
-          $('ul#photos').append('                                     \
-            <li style="background-image: url(' + photo.picture + ')"> \
-              <a href="#" onclick="window.open(\'http://www.facebook.com/' + photo.id + '\');">     \
-              ' + photo.name + '                                      \
-              </a>                                                    \
-            </li>                                                     \
+/*
+          $.each(users, function(index, value){
+              $(elements[index]).html('<img src="https://graph.facebook.com/'+value.id+'/picture"/><p>'+index+'</p>')
+              .attr('title', value.name);
+          });
+*/
+          
+          $('.element').append('                                     \
+            <img src="' + photo.picture + '"/> \
           ');
 
-          $('ul#photos li:nth-child(4n+1)').addClass('first-column');
+         // $('ul#photos li:nth-child(4n+1)').addClass('first-column');
         });
 
         // when a like is received from the backend, add it to the page

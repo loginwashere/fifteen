@@ -76,19 +76,9 @@ app.get('/home', function(request, response) {
 
       // query 4 friends and send them to the socket for this socket id
       session.graphCall('/me/friends')(function(result) {
-        /*  console.log(result);
         result.data.forEach(function(friend) {
           socket_manager.send(socket_id, 'friend', friend);
-        });*/
-          var users = [];
-          for (var i = 14; i >= 0; i--) {
-              users[i] = result.data[i];
-          }
-          var elements = $('.element');
-          $.each(users, function(index, value){
-              $(elements[index]).html('<img src="https://graph.facebook.com/'+value.id+'/picture"/><p>'+index+'</p>')
-              .attr('title', value.name);
-          });
+        });
       });
 
       // query 16 photos and send them to the socket for this socket id
