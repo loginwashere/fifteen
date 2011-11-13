@@ -1,4 +1,4 @@
-[Fifteen friends](http://apps.facebook.com/fifteenfriends/) - puzzle game
+[Fifteen friends](http://apps.facebook.com/fifteenfriends/)
 =====================================
 
 This is a simple puzzle game.
