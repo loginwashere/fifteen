@@ -75,8 +75,6 @@
                 + friend.index + 1 
                 + '</p></div>'
           );
-        });
-        
           if (friend.index === 14) {
             $('#container').append(
                 '<div class="element" id="element' 
@@ -85,6 +83,8 @@
               );
               fifteen.init();
           }
+        });
+        
 
         // when a photo is received from the backend, add it to the page
         socket.on('photo', function(photo) {
