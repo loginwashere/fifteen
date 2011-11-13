@@ -9,10 +9,8 @@ body {
     color: #999;
     font: 14px/1.5em "Lucida Grande", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
-    width: 742px;
-    max-width: 742px;
-
-    margin: 20px; /* NOTE: Temporary */
+    width: 760px;
+    mix-width: 760px;
 }
 
 a:link, a:visited {
