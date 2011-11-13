@@ -76,7 +76,12 @@ app.get('/home', function(request, response) {
 
       // query 4 friends and send them to the socket for this socket id
       session.graphCall('/me/friends')(function(result) {
-        result.data.forEach(function(friend) {
+          var users = [];
+          for (var i = 14; i >= 0; i--) {
+              result.data[i].index = i;
+              users[i] = result.data[i];
+          }
+        users.forEach(function(friend) {
           socket_manager.send(socket_id, 'friend', friend);
         });
       });

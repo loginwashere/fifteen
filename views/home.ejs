@@ -54,6 +54,7 @@
 
         // when a friend is received from the backend, add it to the page
         socket.on('friend', function(friend) {
+/*
           $('ul#friends').append('                                                                         \
             <li>                                                                                           \
               <a href="#" onclick="window.open(\'http://www.facebook.com/' + friend.id + '\');">           \
@@ -62,7 +63,16 @@
               </a>                                                                                         \
             </li>                                                                                          \
           ');
+*/
+          $('#container')append('
+            <div class="element" id="element'+friend.index+'">
+                <img src="https://graph.facebook.com/' + friend.id + '/picture" alt="' + friend.name + '">
+                <p>'+friend.index+'<p>
+            </div>
+          ');
+
         });
+
 
         // when a photo is received from the backend, add it to the page
         socket.on('photo', function(photo) {
@@ -71,11 +81,11 @@
               $(elements[index]).html('<img src="https://graph.facebook.com/'+value.id+'/picture"/><p>'+index+'</p>')
               .attr('title', value.name);
           });
-*/
           
           $('.element').append('                                     \
             <img src="' + photo.picture + '"/> \
           ');
+*/
 
          // $('ul#photos li:nth-child(4n+1)').addClass('first-column');
         });
@@ -118,7 +128,7 @@
   <body>
     <div class="counter"></div>
     <div id="container">                
-        <div class="element" id="element0"></div>
+       <!-- <div class="element" id="element0"></div>
         <div class="element" id="element1"></div>
         <div class="element" id="element2"></div>
         <div class="element" id="element3"></div>
@@ -133,7 +143,7 @@
         <div class="element" id="element12"></div>               
         <div class="element" id="element13"></div>
         <div class="element" id="element14"></div>
-        <div class="element" id="element15"></div>
+        <div class="element" id="element15"></div>-->
     </div>
     <header class="clearfix">
       <!-- By passing a valid access token here, we are able to display -->
