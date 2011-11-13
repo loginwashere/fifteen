@@ -1,0 +1,43 @@
+/* 
+    Document   : style.css
+    Created on : 04.09.2011, 14:45:15
+    Author     : login.was.here
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#container { 
+    width: 425px;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+}
+.row {
+    height: 105px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.element {
+    margin: 0 5px 0 0;
+    padding: 40px 0;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #000;
+    width: 100px;
+    height: 20px;
+    display: block;
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+#element0 {
+    border: 1px solid #fff;
+}
+
