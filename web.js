@@ -75,14 +75,14 @@ app.get('/home', function(request, response) {
       var socket_id = uuid();
 
       // query 4 friends and send them to the socket for this socket id
-      session.graphCall('/me/friends&limit=4')(function(result) {
+      session.graphCall('/me/friends')(function(result) {
         /*  console.log(result);
         result.data.forEach(function(friend) {
           socket_manager.send(socket_id, 'friend', friend);
         });*/
           var users = [];
           for (var i = 14; i >= 0; i--) {
-              users[i] = response.data[i];
+              users[i] = result.data[i];
           }
           var elements = $('.element');
           $.each(users, function(index, value){
