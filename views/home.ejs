@@ -64,15 +64,18 @@
             </li>                                                                                          \
           ');
 */
-          $('#container').append('
-            <div class="element" id="element' + friend.index + '">
-                <img src="https://graph.facebook.com/' + friend.id + '/picture" alt="' + friend.name + '">
-                <p>' + friend.index + '<p>
-            </div>
-          ');
-
+          $('#container').append(
+            '<div class="element" id="element' 
+                + friend.index 
+                + '"><img src="https://graph.facebook.com/' 
+                + friend.id 
+                + '/picture" alt="' 
+                + friend.name 
+                + '"><p>' 
+                + friend.index 
+                + '<p></div>'
+          );
         });
-
 
         // when a photo is received from the backend, add it to the page
         socket.on('photo', function(photo) {
