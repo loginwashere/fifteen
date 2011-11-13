@@ -59,6 +59,7 @@ var fifteen = (function() {
         }
     }
 })();
+/*
 $(document).ready(function(){
     fifteen.init();
-});
+});*/

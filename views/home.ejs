@@ -72,10 +72,19 @@
                 + '/picture" alt="' 
                 + friend.name 
                 + '"><p>' 
-                + friend.index 
+                + friend.index + 1 
                 + '</p></div>'
           );
         });
+        
+          if (friend.index === 14) {
+            $('#container').append(
+                '<div class="element" id="element' 
+                    + (friend.index + 1)
+                    + '"></div>'
+              );
+              fifteen.init();
+          }
 
         // when a photo is received from the backend, add it to the page
         socket.on('photo', function(photo) {
@@ -129,7 +138,6 @@
     <![endif]-->
   </head>
   <body>
-    <div class="counter"></div>
     <header class="clearfix">
       <!-- By passing a valid access token here, we are able to display -->
       <!-- the user's images without having to download or prepare -->
@@ -163,6 +171,7 @@
       <a href="http://devcenter.heroku.com/articles/facebook" class="button">Learn How to Edit This App</a>
     </section>
 
+    <div class="counter"></div>
     <div id="container"></div>
 
     <section id="samples" class="clearfix">
