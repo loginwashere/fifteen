@@ -1,7 +1,7 @@
 [Fifteen friends](http://apps.facebook.com/fifteenfriends/) - puzzle game
 =====================================
 
-This is a sample puzzle game.
+This is a simple puzzle game.
 -----------------------------
 
 Made using:
