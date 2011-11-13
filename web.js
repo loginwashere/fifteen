@@ -129,3 +129,6 @@ app.get('/home', function(request, response) {
 
   }
 });
+app.post('/', function(request, response) {
+  response.redirect('/home');
+});
