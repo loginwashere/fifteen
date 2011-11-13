@@ -1,0 +1,40 @@
+#container { 
+    width: 435px;
+    height: 435px;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+}
+.element {
+    margin: 0 5px 5px 0;
+    border: 1px solid #000;
+    width: 100px;
+    height: 100px;
+    display: block;
+    float: left;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.element img {
+    margin: 25px 0 0 25px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+.element p {    
+    border: 1px solid #000;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin: 3px 3px 0 0;
+    text-align: center;
+    float: right;
+    width: 20px;
+    background: #fff;
+}
+#element15 {
+    border: 1px solid #fff;
+}
+.counter {
+    float: left;
+}
